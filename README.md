@@ -1,4 +1,4 @@
-# bambot
+# bamboohrbot
 
 🤖 Bot to publish BambooHR notifications (company holidays, work anniversaries, birthdays, and who is at the office) to slack each weekday.
 
