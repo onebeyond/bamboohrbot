@@ -1,0 +1,13 @@
+import axios from "axios";
+
+import { TSlackMessage } from ".";
+
+export async function postSlackMessage(url: string, msg: TSlackMessage): Promise<void> {
+  if (!msg.text) return Promise.resolve();
+
+  try {
+    await axios.post(url, JSON.stringify(msg));
+  } catch (error) {
+    console.error(error);
+  }
+}

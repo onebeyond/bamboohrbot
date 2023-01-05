@@ -1,0 +1,30 @@
+service: ${file(./package.json):name}
+
+frameworkVersion: '3'
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: eu-west-1
+  stage: ${env:ENVIRONMENT}
+  timeout: 30
+  memorySize: 128
+  environment:
+    BAMBOOHR_KEY: ${env:BAMBOOHR_KEY}
+    BAMBOOHR_SUBDOMAIN: ${env:BAMBOOHR_SUBDOMAIN}
+    COUNTRY_FILTER: ${env:COUNTRY_FILTER}
+    CELEBRATIONS_WEBHOOK_URL: ${env:CELEBRATIONS_WEBHOOK_URL}
+    BANK_HOLIDAYS_WEBHOOK_URL: ${env:BANK_HOLIDAYS_WEBHOOK_URL}
+    OFFICE_WEBHOOK_URL: ${env:OFFICE_WEBHOOK_URL}
+    TIME_OFF_OFFICE_CODE: ${env:TIME_OFF_OFFICE_CODE}
+
+plugins:
+  - serverless-esbuild
+
+functions:
+  main:
+    handler: src/handler.main
+    events:
+      - schedule: cron(0 7 ? * MON-FRI *)
