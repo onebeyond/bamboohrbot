@@ -1,26 +1,29 @@
-# Serverless Framework AWS TypeScript Example
+# bambot
 
-This template demonstrates how to deploy a TypeScript function running on AWS Lambda using Serverless Framework. The deployed function does not include any event definitions as well as any kind of persistence (database). For more advanced configurations check out the [examples repo](https://github.com/serverless/examples/) which includes integrations with SQS, DynamoDB or examples of functions that are triggered in `cron`-like manner. For details about configuration of specific `events`, please refer to our [documentation](https://www.serverless.com/framework/docs/providers/aws/events/).
+🤖 Bot to publish BambooHR notifications (company holidays, work anniversaries, birthdays, and who is at the office) to slack each weekday.
+
+- Who's at the office
+- Birthdays
+- Work anniversaries, including a welcome message on the first day
+- Company-observed holidays
+
+## Setup
+
+- Clone the repository and run `npm install`.
+- Ensure your [AWS credentials are available](https://serverless.com/framework/docs/providers/aws/guide/credentials/)
+- If you have access, generate a [BambooHR API key](https://www.bamboohr.com/api/documentation/) within your account. Otherwise, have a BambooHR admin at your company generate one for you.
+- Determine the BambooHR subdomain associated with your company.
+- Configure at leaast one [slack webohook](https://slack.com/apps/manage/custom-integrations).
+- Once deployed, it will run from Monday to Friday at 7 a.m. UTC. This can be adjusted in `serverless.yml` file.
 
 ## Usage
 
 ### Deployment
 
-In order to deploy the example, you need to run the following command:
+In order to deploy the code, you need to run the following command:
 
 ```
 $ serverless deploy
-```
-
-After running deploy, you should see output similar to:
-
-```bash
-Deploying aws-node-typescript to stage dev (us-east-1)
-
-✔ Service deployed to stack aws-node-typescript-dev (112s)
-
-functions:
-  hello: aws-node-typescript-dev-hello (806 B)
 ```
 
 ### Invocation
@@ -31,28 +34,10 @@ After successful deployment, you can invoke the deployed function by using the f
 serverless invoke --function main
 ```
 
-Which should result in response similar to the following:
-
-```json
-{
-    "message": "Go Serverless v3! Your function executed successfully!",
-    "input": {}
-}
-```
-
 ### Local development
 
 You can invoke your function locally by using the following command:
 
 ```bash
-serverless invoke local --function hello
-```
-
-Which should result in response similar to the following:
-
-```
-{
-    "message": "Go Serverless v3! Your function executed successfully!",
-    "input": {}
-}
+serverless invoke local --function main
 ```
