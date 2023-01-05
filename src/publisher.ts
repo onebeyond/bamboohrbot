@@ -7,10 +7,10 @@ export const pusblishBankHolidays = async (
   bankHolidays: TWhosOut,
   today: moment.Moment
 ): Promise<void> => {
-  let monthBankHolidaysBlocks: any[] = [];
+  const monthBankHolidaysBlocks: any[] = [];
   let nextBankHolidaysBlocks: any[] = [];
 
-  if (bankHolidays.month.length > 0 && 
+  if (bankHolidays.month.length > 0 &&
     ((today.date() === 1 && today.isoWeekday() <= FRIDAY_ISO_WEEKDAY) ||
     (today.date() === 2 && today.isoWeekday() === MONDAY_ISO_WEEKDAY) ||
     (today.date() === 3 && today.isoWeekday() === MONDAY_ISO_WEEKDAY))) {
@@ -143,7 +143,7 @@ export const publishEmployeesCelebrations = async (
     .filter(employee => moment(employee.hireDate).isValid())
     .filter(employee => moment(employee.hireDate).isSame(today, 'day'));
 
-  let firstDayBlocks: any[] = [];
+  const firstDayBlocks: any[] = [];
   if (firstDayEmployees.length > 0) {
     firstDayBlocks.push({
       "type": "context",
@@ -199,7 +199,7 @@ export const publishEmployeesCelebrations = async (
       return previousValue;
     }, []);
 
-  let birthdaysBlocks: any[] = [];
+  const birthdaysBlocks: any[] = [];
 
   if (birthdays.length > 0) {
     birthdaysBlocks.push({
@@ -263,7 +263,7 @@ export const publishEmployeesCelebrations = async (
       return previousValue;
     }, []);
 
-  let anniversariesBlocks: any[] = [];
+  const anniversariesBlocks: any[] = [];
 
   if (anniversaries.length > 0) {
     anniversariesBlocks.push({

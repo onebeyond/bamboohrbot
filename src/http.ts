@@ -8,6 +8,7 @@ export async function postSlackMessage(url: string, msg: TSlackMessage): Promise
   try {
     await axios.post(url, JSON.stringify(msg));
   } catch (error) {
+    // tslint:disable-next-line
     console.error(error);
   }
 }
