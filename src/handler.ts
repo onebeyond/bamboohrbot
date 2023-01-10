@@ -12,7 +12,8 @@ import {
 
 export async function main() {
   const today = moment();
-  const countryList: string[] = process.env.COUNTRY_FILTER?.split(',') ?? [];
+  const countryList: string[] =
+    process.env.EMPLOYEE_COUNTRY_FILTER?.split(',') ?? [];
 
   // Fetch info from BambooHR API
   const [employees, employeesAtOffice, bankHolidays] = await Promise.all([

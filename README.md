@@ -30,7 +30,7 @@ CELEBRATIONS_WEBHOOK_URL=
 OFFICE_WEBHOOK_URL=
 BANK_HOLIDAYS_WEBHOOK_URL=
 TIME_OFF_OFFICE_CODE=
-COUNTRY_FILTER=
+EMPLOYEE_COUNTRY_FILTER=
 ```
 
 To run it locally, you can create an `.env` file. To deploy it in the cloud, you need to define them in the CI/CD pipeline, as they are read in the GitHub action that deploys it to AWS.

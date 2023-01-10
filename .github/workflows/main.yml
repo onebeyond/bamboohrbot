@@ -33,4 +33,4 @@ jobs:
           OFFICE_WEBHOOK_URL: ${{ secrets.OFFICE_WEBHOOK_URL }}
           BANK_HOLIDAYS_WEBHOOK_URL: ${{ secrets.BANK_HOLIDAYS_WEBHOOK_URL }}
           TIME_OFF_OFFICE_CODE: ${{ secrets.TIME_OFF_OFFICE_CODE }}
-          COUNTRY_FILTER: ${{ secrets.COUNTRY_FILTER }}
+          EMPLOYEE_COUNTRY_FILTER: ${{ secrets.EMPLOYEE_COUNTRY_FILTER }}
