@@ -9,19 +9,19 @@ export const HUMAN_READABLE_DATE = 'dddd, D MMMM YYYY'
 export const BAMBOOHR_TIME_OFF_APPROVED = 'approved';
 export const BAMBOOHR_TIME_WHOS_OUT_TYPE = 'holiday';
 
-export const ordinalSuffixOf = (n: number) => {
+export const ordinalSuffixOf = (n: number): string => {
   const j = n % 10;
   const k = n % 100;
   if (j === 1 && k !== 11) {
-    return n + "st";
+    return `${n}st`;
   }
   if (j === 2 && k !== 12) {
-    return n + "nd";
+    return `${n}nd`;
   }
   if (j === 3 && k !== 13) {
-    return n + "rd";
+    return `${n}rd`;
   }
-  return n + "th";
+  return `${n}th`;
 }
 
 export const nextWorkingDay = (today: moment.Moment): moment.Moment => moment(today)
