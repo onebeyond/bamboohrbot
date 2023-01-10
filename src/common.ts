@@ -22,7 +22,7 @@ export const ordinalSuffixOf = (n: number): string => {
     return `${n}rd`;
   }
   return `${n}th`;
-}
+};
 
 export const nextWorkingDay = (today: moment.Moment): moment.Moment =>
   moment(today).add(
