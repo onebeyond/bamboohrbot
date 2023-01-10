@@ -10,7 +10,7 @@
     "lint": "tslint -c tslint.json 'src/**/*.ts' 'test/**/*.ts'"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "**/*": "prettier --write --ignore-unknown ."
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.0",

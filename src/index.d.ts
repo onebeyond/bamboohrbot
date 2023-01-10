@@ -29,9 +29,9 @@ export type TBambooHREmployeeExtended = TBambooHREmployee & {
   hireDate?: string; // YYYY-MM-DD
   country?: string;
   // Manually calculated
-  birthdayOn?: string;    // used to say the day when the birthday is on weekend
+  birthdayOn?: string; // used to say the day when the birthday is on weekend
   anniversaryOn?: string; // used to say the day when the birthday is on weekend
-  anniversary?: string;   // ordinal number of the anniversary
+  anniversary?: string; // ordinal number of the anniversary
 };
 
 export type TBambooHREmployeesDirectory = {
@@ -59,8 +59,8 @@ export type TBambooHRWhosOut = {
   type: string;
   employeeId?: number;
   name: string;
-  start: string;  // YYYY-MM-DD
-  end: string;    // YYYY-MM-DD
+  start: string; // YYYY-MM-DD
+  end: string; // YYYY-MM-DD
 };
 
 export type TWhosOut = {
@@ -73,4 +73,4 @@ type TSlackBlock = {};
 export type TSlackMessage = {
   text: string;
   blocks: TSlackBlock[];
-}
+};
