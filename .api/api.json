@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "apis": [
+    {
+      "identifier": "bamboohr",
+      "source": "@bamboohr/v1#43haj4kl796vw3d",
+      "integrity": "sha512-9osabQer2tXDk+WA2AKH9x4iIKMhW8KtHP826DXVaYPyq296K1L7wI0rwkIyUTzW2oTDH4RclRfD6ZKuWRzDQA==",
+      "installerVersion": "5.0.5"
+    }
+  ]
+}
