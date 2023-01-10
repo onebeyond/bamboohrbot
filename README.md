@@ -16,6 +16,25 @@
 - Configure at leaast one [slack webohook](https://slack.com/apps/manage/custom-integrations).
 - Once deployed, it will run from Monday to Friday at 7 a.m. UTC. This can be adjusted in `serverless.yml` file.
 
+### Environment variables
+
+The service needs the following env variables:
+
+```
+ENVIRONMENT=
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+BAMBOOHR_KEY=
+BAMBOOHR_SUBDOMAIN=
+CELEBRATIONS_WEBHOOK_URL=
+OFFICE_WEBHOOK_URL=
+BANK_HOLIDAYS_WEBHOOK_URL=
+TIME_OFF_OFFICE_CODE=
+COUNTRY_FILTER=
+```
+
+To run it locally, you can create an `.env` file. To deploy it in the cloud, you need to define them in the CI/CD pipeline, as they are read in the GitHub action that deploys it to AWS.
+
 ## Usage
 
 ### Deployment
