@@ -1,5 +1,5 @@
 {
-  "name": "bambot",
+  "name": "bamboohrbot",
   "version": "1.0.0",
   "description": "Bot to publish BambooHR notifications to slack.",
   "license": "MIT",
