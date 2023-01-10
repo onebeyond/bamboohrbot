@@ -1,0 +1,14 @@
+# Ignore artifacts:
+.api
+.esbuild
+.github
+.husky
+mock
+coverage
+node_modules
+.serverless
+.env
+mock/
+package.json
+package-lock.json
+tslint.json

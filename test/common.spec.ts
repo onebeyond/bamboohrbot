@@ -8,7 +8,7 @@ import {
   BAMBOOHR_TIME_OFF_APPROVED,
   BAMBOOHR_TIME_WHOS_OUT_TYPE,
   ordinalSuffixOf,
-  nextWorkingDay
+  nextWorkingDay,
 } from '../src/common';
 
 describe('Constants', () => {
@@ -20,7 +20,7 @@ describe('Constants', () => {
     expect(HUMAN_READABLE_DATE).toBe('dddd, D MMMM YYYY');
     expect(BAMBOOHR_TIME_OFF_APPROVED).toBe('approved');
     expect(BAMBOOHR_TIME_WHOS_OUT_TYPE).toBe('holiday');
-  })
+  });
 });
 
 describe('Ordinal numbers', () => {
@@ -61,31 +61,50 @@ describe('Ordinal numbers', () => {
 
 describe('Next working day', () => {
   test('On Monday, return Tuesday as next working day', () => {
-    expect(nextWorkingDay(moment().startOf('isoWeek')).format('YYYY-MM-DD'))
-      .toBe(moment().startOf('isoWeek').add(1, 'days').format('YYYY-MM-DD'));
+    expect(
+      nextWorkingDay(moment().startOf('isoWeek')).format('YYYY-MM-DD')
+    ).toBe(moment().startOf('isoWeek').add(1, 'days').format('YYYY-MM-DD'));
   });
   test('On Tuesday, return Wednesday as next working day', () => {
-    expect(nextWorkingDay(moment().startOf('isoWeek').add(1, 'days')).format('YYYY-MM-DD'))
-      .toBe(moment().startOf('isoWeek').add(2, 'days').format('YYYY-MM-DD'));
+    expect(
+      nextWorkingDay(moment().startOf('isoWeek').add(1, 'days')).format(
+        'YYYY-MM-DD'
+      )
+    ).toBe(moment().startOf('isoWeek').add(2, 'days').format('YYYY-MM-DD'));
   });
   test('On Wednesday, return Thursday as next working day', () => {
-    expect(nextWorkingDay(moment().startOf('isoWeek').add(2, 'days')).format('YYYY-MM-DD'))
-      .toBe(moment().startOf('isoWeek').add(3, 'days').format('YYYY-MM-DD'));
+    expect(
+      nextWorkingDay(moment().startOf('isoWeek').add(2, 'days')).format(
+        'YYYY-MM-DD'
+      )
+    ).toBe(moment().startOf('isoWeek').add(3, 'days').format('YYYY-MM-DD'));
   });
   test('On Thursday, return Friday as next working day', () => {
-    expect(nextWorkingDay(moment().startOf('isoWeek').add(3, 'days')).format('YYYY-MM-DD'))
-      .toBe(moment().startOf('isoWeek').add(4, 'days').format('YYYY-MM-DD'));
+    expect(
+      nextWorkingDay(moment().startOf('isoWeek').add(3, 'days')).format(
+        'YYYY-MM-DD'
+      )
+    ).toBe(moment().startOf('isoWeek').add(4, 'days').format('YYYY-MM-DD'));
   });
   test('On Friday, return next Monday as next working day', () => {
-    expect(nextWorkingDay(moment().startOf('isoWeek').add(4, 'days')).format('YYYY-MM-DD'))
-    .toBe(moment().startOf('isoWeek').add(7, 'days').format('YYYY-MM-DD'));
+    expect(
+      nextWorkingDay(moment().startOf('isoWeek').add(4, 'days')).format(
+        'YYYY-MM-DD'
+      )
+    ).toBe(moment().startOf('isoWeek').add(7, 'days').format('YYYY-MM-DD'));
   });
   test('On Saturday, return next Monday as next working day', () => {
-    expect(nextWorkingDay(moment().startOf('isoWeek').add(5, 'days')).format('YYYY-MM-DD'))
-    .toBe(moment().startOf('isoWeek').add(7, 'days').format('YYYY-MM-DD'));
+    expect(
+      nextWorkingDay(moment().startOf('isoWeek').add(5, 'days')).format(
+        'YYYY-MM-DD'
+      )
+    ).toBe(moment().startOf('isoWeek').add(7, 'days').format('YYYY-MM-DD'));
   });
   test('On Sunday, return next Monday as next working day', () => {
-    expect(nextWorkingDay(moment().startOf('isoWeek').add(6, 'days')).format('YYYY-MM-DD'))
-    .toBe(moment().startOf('isoWeek').add(7, 'days').format('YYYY-MM-DD'));
+    expect(
+      nextWorkingDay(moment().startOf('isoWeek').add(6, 'days')).format(
+        'YYYY-MM-DD'
+      )
+    ).toBe(moment().startOf('isoWeek').add(7, 'days').format('YYYY-MM-DD'));
   });
 });

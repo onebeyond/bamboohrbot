@@ -6,12 +6,12 @@ module.exports = {
     '^.+\\.ts?$': 'ts-jest',
   },
   transformIgnorePatterns: [
-    "node_modules/(?!(p-map"
-      + "|indent-string"
-      + "|aggregate-error"
-      + "|clean-stack"
-      + "|escape-string-regexp"
-      + ")/)",
+    'node_modules/(?!(p-map' +
+      '|indent-string' +
+      '|aggregate-error' +
+      '|clean-stack' +
+      '|escape-string-regexp' +
+      ')/)',
   ],
-  verbose: true
+  verbose: true,
 };
