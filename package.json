@@ -1,7 +1,7 @@
 {
-  "name": "bambot",
+  "name": "bamboohrbot",
   "version": "1.0.0",
-  "description": "Bot to publish BambooHR notifications to slack.",
+  "description": "Bot to publish BambooHR notifications (company holidays, work anniversaries, birthdays, and who is at the office) to slack each weekday.",
   "license": "MIT",
   "scripts": {
     "invoke": "ENVIRONMENT=local serverless invoke local --function main",
