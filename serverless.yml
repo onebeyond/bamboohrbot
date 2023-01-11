@@ -9,8 +9,8 @@ provider:
   runtime: nodejs16.x
   region: eu-west-1
   stage: ${env:ENVIRONMENT}
-  timeout: 30
-  memorySize: 128
+  timeout: 180 # 3 minutes
+  memorySize: 128 # MB
   environment:
     BAMBOOHR_KEY: ${env:BAMBOOHR_KEY}
     BAMBOOHR_SUBDOMAIN: ${env:BAMBOOHR_SUBDOMAIN}
