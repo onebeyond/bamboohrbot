@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 import moment from 'moment';
+import sdk from '@api/bamboohr';
 
 dotenv.config();
 
@@ -9,8 +10,14 @@ import {
   publishEmployeesCelebrations,
   pusblishBankHolidays,
 } from './publisher';
+import { getSecret, initializeSecretsManager } from './secrets';
 
 export async function main() {
+  initializeSecretsManager();
+
+  const value = await getSecret('BAMBOOHR_KEY');
+  sdk.auth(value ?? '');
+
   const today = moment();
   const countryList: string[] =
     process.env.EMPLOYEE_COUNTRY_FILTER?.split(',') ?? [];

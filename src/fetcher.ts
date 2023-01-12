@@ -18,8 +18,6 @@ import {
   TWhosOut,
 } from '.';
 
-sdk.auth(process.env.BAMBOOHR_KEY ?? '');
-
 const commonMetadata = {
   companyDomain: process.env.BAMBOOHR_SUBDOMAIN as string,
   Accept: 'application/json' as const,
