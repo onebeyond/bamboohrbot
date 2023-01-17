@@ -7,12 +7,11 @@ useDotenv: true
 provider:
   name: aws
   runtime: nodejs16.x
-  region: eu-west-1
+  region: ${env:AWS_REGION, 'eu-west-1'}
   stage: ${env:ENVIRONMENT}
   timeout: 180 # 3 minutes
   memorySize: 128 # MB
   environment:
-    BAMBOOHR_KEY: ${env:BAMBOOHR_KEY}
     BAMBOOHR_SUBDOMAIN: ${env:BAMBOOHR_SUBDOMAIN}
     EMPLOYEE_COUNTRY_FILTER: ${env:EMPLOYEE_COUNTRY_FILTER}
     CELEBRATIONS_WEBHOOK_URL: ${env:CELEBRATIONS_WEBHOOK_URL}

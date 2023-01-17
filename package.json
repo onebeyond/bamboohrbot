@@ -7,7 +7,10 @@
     "invoke": "ENVIRONMENT=local serverless invoke local --function main",
     "prepare": "husky install",
     "test": "jest",
-    "lint": "tslint -c tslint.json 'src/**/*.ts' 'test/**/*.ts'"
+    "lint": "tslint -c tslint.json 'src/**/*.ts' 'test/**/*.ts'",
+    "format": "prettier --write --ignore-unknown .",
+    "infra:dev:start": "docker-compose -f docker/docker-compose.dev.yml up -d",
+    "infra:dev:stop": "docker-compose -f docker/docker-compose.dev.yml down"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown ."
@@ -30,6 +33,7 @@
   },
   "dependencies": {
     "@api/bamboohr": "file:.api/apis/bamboohr",
+    "@aws-sdk/client-secrets-manager": "^3.245.0",
     "axios": "^1.2.1",
     "dotenv": "^16.0.3",
     "moment": "^2.29.4",
