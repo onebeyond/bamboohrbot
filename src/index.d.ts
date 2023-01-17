@@ -74,3 +74,5 @@ export type TSlackMessage = {
   text: string;
   blocks: TSlackBlock[];
 };
+
+export type TSecrets = Record<string, any>;

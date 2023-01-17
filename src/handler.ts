@@ -11,11 +11,22 @@ import {
   pusblishBankHolidays,
 } from './publisher';
 import { getSecret, initializeSecretsManager } from './secrets';
+import { TSecrets } from '.';
+
+const secrets: TSecrets = {};
+
+initializeSecretsManager();
+
+const getSecretFromAWS = async (key: string): Promise<string | undefined> => {
+  if (secrets[key]) return secrets[key];
+
+  const value = await getSecret(key);
+  secrets[key] = value;
+  return value;
+};
 
 export async function main() {
-  initializeSecretsManager();
-
-  const value = await getSecret('BAMBOOHR_KEY');
+  const value = await getSecretFromAWS('BAMBOOHR_KEY');
   sdk.auth(value ?? '');
 
   const today = moment();
