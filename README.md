@@ -22,9 +22,9 @@ The service needs the following env variables:
 
 ```
 ENVIRONMENT=
+AWS_ACCOUNT_ID=
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
-BAMBOOHR_KEY=
 BAMBOOHR_SUBDOMAIN=
 CELEBRATIONS_WEBHOOK_URL=
 OFFICE_WEBHOOK_URL=
@@ -60,8 +60,8 @@ serverless invoke --function main
 First you need to create an `.env` file with the following variables:
 
 ```
-ENVIRONMENT=
-BAMBOOHR_KEY=
+ENVIRONMENT=local
+AWS_ACCOUNT_ID=
 BAMBOOHR_SUBDOMAIN=
 CELEBRATIONS_WEBHOOK_URL=
 OFFICE_WEBHOOK_URL=
