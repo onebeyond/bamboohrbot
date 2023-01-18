@@ -11,7 +11,13 @@ provider:
   stage: ${env:ENVIRONMENT}
   timeout: 180 # 3 minutes
   memorySize: 128 # MB
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'secretsmanager:GetSecretValue'
+      Resource: 'arn:aws:secretsmanager:${self:provider.region}:${self:provider.environment.AWS_ACCOUNT_ID}:*'
   environment:
+    AWS_ACCOUNT_ID: ${env:AWS_ACCOUNT_ID}
     BAMBOOHR_SUBDOMAIN: ${env:BAMBOOHR_SUBDOMAIN}
     EMPLOYEE_COUNTRY_FILTER: ${env:EMPLOYEE_COUNTRY_FILTER}
     CELEBRATIONS_WEBHOOK_URL: ${env:CELEBRATIONS_WEBHOOK_URL}
