@@ -264,11 +264,21 @@ export const publishEmployeesCelebrations = async (
         ],
       }))
     );
-
+  } else {
     birthdaysBlocks.push({
-      type: 'divider',
+      type: 'context',
+      elements: [
+        {
+          type: 'mrkdwn',
+          plain_text:
+            ':mad-hatter::teapot: *A very Merry Unbirthday to you all!* :mad-hatter::teapot:',
+        },
+      ],
     });
   }
+  birthdaysBlocks.push({
+    type: 'divider',
+  });
 
   // ANNIVERSARY
   const anniversaries = employees
