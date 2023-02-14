@@ -1,5 +1,7 @@
 import moment from 'moment';
 
+import defaultMessage from './constants/defaultMessage';
+
 import {
   TBambooHREmployeeAtOffice,
   TBambooHREmployeeExtended,
@@ -264,21 +266,10 @@ export const publishEmployeesCelebrations = async (
         ],
       }))
     );
-  } else {
     birthdaysBlocks.push({
-      type: 'context',
-      elements: [
-        {
-          type: 'mrkdwn',
-          plain_text:
-            ':mad-hatter::teapot: *A very Merry Unbirthday to you all!* :mad-hatter::teapot:',
-        },
-      ],
+      type: 'divider',
     });
   }
-  birthdaysBlocks.push({
-    type: 'divider',
-  });
 
   // ANNIVERSARY
   const anniversaries = employees
@@ -368,22 +359,43 @@ export const publishEmployeesCelebrations = async (
     });
   }
 
-  const message = {
-    text: "🥳 Let's celebrate together",
-    blocks: [
-      {
-        type: 'header',
-        text: {
-          type: 'plain_text',
-          text: "🥳 Let's celebrate together",
-          emoji: true,
+  const celebrationMessages = [
+    ...firstDayBlocks,
+    ...birthdaysBlocks,
+    ...anniversariesBlocks,
+  ];
+
+  const buildMessageToSend = (messages: object[]) => {
+    const base = {
+      text: "🥳 Let's celebrate together",
+      blocks: [
+        {
+          type: 'header',
+          text: {
+            type: 'plain_text',
+            text: "🥳 Let's celebrate together",
+            emoji: true,
+          },
         },
-      },
-      ...firstDayBlocks,
-      ...birthdaysBlocks,
-      ...anniversariesBlocks,
-    ],
+      ],
+    };
+
+    return messages.length > 0
+      ? {
+          ...base,
+          blocks: [...base.blocks, ...messages],
+        }
+      : {
+          ...base,
+          blocks: {
+            ...base.blocks,
+            defaultMessage,
+          },
+        };
   };
 
-  await postSlackMessage(process.env.CELEBRATIONS_WEBHOOK_URL ?? '', message);
+  await postSlackMessage(
+    process.env.CELEBRATIONS_WEBHOOK_URL ?? '',
+    buildMessageToSend(celebrationMessages)
+  );
 };
