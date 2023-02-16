@@ -15,9 +15,8 @@ provider:
     - Effect: 'Allow'
       Action:
         - 'secretsmanager:GetSecretValue'
-      Resource: 'arn:aws:secretsmanager:${self:provider.region}:${self:provider.environment.AWS_ACCOUNT_ID}:*'
+      Resource: 'arn:aws:secretsmanager:${self:provider.region}:${aws:accountId}:*'
   environment:
-    AWS_ACCOUNT_ID: ${aws:accountId}
     BAMBOOHR_SUBDOMAIN: ${env:BAMBOOHR_SUBDOMAIN}
     EMPLOYEE_COUNTRY_FILTER: ${env:EMPLOYEE_COUNTRY_FILTER}
     CELEBRATIONS_WEBHOOK_URL: ${env:CELEBRATIONS_WEBHOOK_URL}
