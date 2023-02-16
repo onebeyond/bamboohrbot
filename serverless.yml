@@ -15,7 +15,7 @@ provider:
     - Effect: 'Allow'
       Action:
         - 'secretsmanager:GetSecretValue'
-      Resource: 'arn:aws:secretsmanager:${self:provider.region}:${aws:accountId}:*'
+      Resource: 'arn:aws:secretsmanager:${aws:region}:${aws:accountId}:*'
   environment:
     BAMBOOHR_SUBDOMAIN: ${env:BAMBOOHR_SUBDOMAIN}
     EMPLOYEE_COUNTRY_FILTER: ${env:EMPLOYEE_COUNTRY_FILTER}
