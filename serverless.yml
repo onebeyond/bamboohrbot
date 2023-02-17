@@ -7,7 +7,7 @@ useDotenv: true
 provider:
   name: aws
   runtime: nodejs16.x
-  region: ${env:AWS_REGION, 'eu-west-1'}
+  region: ${aws:region}
   stage: ${env:ENVIRONMENT}
   timeout: 180 # 3 minutes
   memorySize: 128 # MB
@@ -15,7 +15,7 @@ provider:
     - Effect: 'Allow'
       Action:
         - 'secretsmanager:GetSecretValue'
-      Resource: 'arn:aws:secretsmanager:${self:provider.region}:${self:provider.environment.AWS_ACCOUNT_ID}:*'
+      Resource: 'arn:aws:secretsmanager:${aws:region}:${aws:accountId}:*'
   environment:
     BAMBOOHR_SUBDOMAIN: ${env:BAMBOOHR_SUBDOMAIN}
     EMPLOYEE_COUNTRY_FILTER: ${env:EMPLOYEE_COUNTRY_FILTER}
