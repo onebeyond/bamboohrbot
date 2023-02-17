@@ -17,6 +17,7 @@ provider:
         - 'secretsmanager:GetSecretValue'
       Resource: 'arn:aws:secretsmanager:${aws:region}:${aws:accountId}:*'
   environment:
+    AWS_REGION: ${env:AWS_REGION}
     BAMBOOHR_SUBDOMAIN: ${env:BAMBOOHR_SUBDOMAIN}
     EMPLOYEE_COUNTRY_FILTER: ${env:EMPLOYEE_COUNTRY_FILTER}
     CELEBRATIONS_WEBHOOK_URL: ${env:CELEBRATIONS_WEBHOOK_URL}
