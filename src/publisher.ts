@@ -389,7 +389,7 @@ export const publishEmployeesCelebrations = async (
           ...base,
           blocks: {
             ...base.blocks,
-            defaultMessage,
+            ...defaultMessage,
           },
         };
   };
