@@ -20,39 +20,39 @@ export const publishEmployeesCelebrations = async (
     ...anniversariesBlocks,
   ];
 
-  const buildMessageToSend = (messages: object[]) => {
-    const base = {
-      text: "🥳 Let's celebrate together",
-      blocks: [
-        {
-          type: 'header',
-          text: {
-            type: 'plain_text',
-            text: "🥳 Let's celebrate together",
-            emoji: true,
-          },
-        },
-      ],
-    };
-
-    return messages.length > 0
-      ? {
-          ...base,
-          blocks: [...base.blocks, ...messages],
-        }
-      : {
-          ...base,
-          blocks: {
-            ...base.blocks,
-            ...defaultMessage,
-          },
-        };
-  };
-
   await postSlackMessage(
     process.env.CELEBRATIONS_WEBHOOK_URL ?? '',
     buildMessageToSend(celebrationMessages)
   );
+};
+
+const buildMessageToSend = (messages: object[]) => {
+  const base = {
+    text: "🥳 Let's celebrate together",
+    blocks: [
+      {
+        type: 'header',
+        text: {
+          type: 'plain_text',
+          text: "🥳 Let's celebrate together",
+          emoji: true,
+        },
+      },
+    ],
+  };
+
+  return messages.length > 0
+    ? {
+        ...base,
+        blocks: [...base.blocks, ...messages],
+      }
+    : {
+        ...base,
+        blocks: {
+          ...base.blocks,
+          ...defaultMessage,
+        },
+      };
 };
 
 const buildFirstDayBlocks = (
