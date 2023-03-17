@@ -42,6 +42,16 @@
       "contributions": [
         "review"
       ]
+    },
+    {
+      "login": "w3dani",
+      "name": "w3dani",
+      "avatar_url": "https://avatars.githubusercontent.com/u/48931264?v=4",
+      "profile": "https://github.com/w3dani",
+      "contributions": [
+        "infra",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
