@@ -10,7 +10,55 @@ export const publishEmployeesCelebrations = async (
   employees: TBambooHREmployeeExtended[],
   today: moment.Moment
 ): Promise<void> => {
-  // FIRST DAY
+  const firstDayBlocks: any[] = buildFirstDayBlocks(employees, today);
+  const birthdaysBlocks: any[] = buildBirthdaysBlocks(employees, today);
+  const anniversariesBlocks: any[] = buildAnniversariesBlocks(employees, today);
+
+  const celebrationMessages = [
+    ...firstDayBlocks,
+    ...birthdaysBlocks,
+    ...anniversariesBlocks,
+  ];
+
+  const buildMessageToSend = (messages: object[]) => {
+    const base = {
+      text: "🥳 Let's celebrate together",
+      blocks: [
+        {
+          type: 'header',
+          text: {
+            type: 'plain_text',
+            text: "🥳 Let's celebrate together",
+            emoji: true,
+          },
+        },
+      ],
+    };
+
+    return messages.length > 0
+      ? {
+          ...base,
+          blocks: [...base.blocks, ...messages],
+        }
+      : {
+          ...base,
+          blocks: {
+            ...base.blocks,
+            ...defaultMessage,
+          },
+        };
+  };
+
+  await postSlackMessage(
+    process.env.CELEBRATIONS_WEBHOOK_URL ?? '',
+    buildMessageToSend(celebrationMessages)
+  );
+};
+
+const buildFirstDayBlocks = (
+  employees: TBambooHREmployeeExtended[],
+  today: moment.Moment
+): any[] => {
   const firstDayEmployees = employees
     .filter(employee => moment(employee.hireDate).isValid())
     .filter(employee => moment(employee.hireDate).isSame(today, 'day'));
@@ -48,8 +96,13 @@ export const publishEmployeesCelebrations = async (
       type: 'divider',
     });
   }
+  return firstDayBlocks;
+};
 
-  // BIRTHDAY
+const buildBirthdaysBlocks = (
+  employees: TBambooHREmployeeExtended[],
+  today: moment.Moment
+): any[] => {
   const birthdays = employees
     .filter(employee => employee.birthday)
     .reduce<TBambooHREmployeeExtended[]>((previousValue, employee) => {
@@ -121,8 +174,13 @@ export const publishEmployeesCelebrations = async (
       type: 'divider',
     });
   }
+  return birthdaysBlocks;
+};
 
-  // ANNIVERSARY
+const buildAnniversariesBlocks = (
+  employees: TBambooHREmployeeExtended[],
+  today: moment.Moment
+): any[] => {
   const anniversaries = employees
     .filter(employee => moment(employee.hireDate).isValid())
     .reduce<TBambooHREmployeeExtended[]>((previousValue, employee) => {
@@ -210,43 +268,5 @@ export const publishEmployeesCelebrations = async (
     });
   }
 
-  const celebrationMessages = [
-    ...firstDayBlocks,
-    ...birthdaysBlocks,
-    ...anniversariesBlocks,
-  ];
-
-  const buildMessageToSend = (messages: object[]) => {
-    const base = {
-      text: "🥳 Let's celebrate together",
-      blocks: [
-        {
-          type: 'header',
-          text: {
-            type: 'plain_text',
-            text: "🥳 Let's celebrate together",
-            emoji: true,
-          },
-        },
-      ],
-    };
-
-    return messages.length > 0
-      ? {
-          ...base,
-          blocks: [...base.blocks, ...messages],
-        }
-      : {
-          ...base,
-          blocks: {
-            ...base.blocks,
-            ...defaultMessage,
-          },
-        };
-  };
-
-  await postSlackMessage(
-    process.env.CELEBRATIONS_WEBHOOK_URL ?? '',
-    buildMessageToSend(celebrationMessages)
-  );
+  return anniversariesBlocks;
 };
