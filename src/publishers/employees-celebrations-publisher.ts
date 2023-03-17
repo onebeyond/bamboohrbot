@@ -48,10 +48,7 @@ const buildMessageToSend = (messages: object[]) => {
       }
     : {
         ...base,
-        blocks: {
-          ...base.blocks,
-          ...defaultMessage,
-        },
+        blocks: [...base.blocks, defaultMessage],
       };
 };
 
