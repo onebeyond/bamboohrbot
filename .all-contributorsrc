@@ -1,0 +1,29 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "totegsito",
+      "name": "Fran Quesada",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12380342?v=4",
+      "profile": "https://github.com/totegsito",
+      "contributions": [
+        "bug",
+        "code",
+        "doc",
+        "maintenance",
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "bamboohrbot",
+  "projectOwner": "guidesmiths"
+}
