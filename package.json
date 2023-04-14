@@ -16,7 +16,7 @@
     "**/*": "prettier --write --ignore-unknown ."
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.4.4",
+    "@commitlint/cli": "^17.6.0",
     "@commitlint/config-conventional": "^17.4.4",
     "@jest/globals": "^29.4.3",
     "@tsconfig/node16": "^1.0.3",
