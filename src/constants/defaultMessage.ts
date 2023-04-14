@@ -3,8 +3,7 @@ export default {
   elements: [
     {
       type: 'mrkdwn',
-      plain_text:
-        ':mad-hatter::teapot: *A very Merry Unbirthday to you all!* :mad-hatter::teapot:',
+      text: ':mad-hatter::teapot: *A very Merry Unbirthday to you all!* :mad-hatter::teapot:',
     },
   ],
 };

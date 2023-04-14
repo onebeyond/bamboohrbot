@@ -1,165 +1,61 @@
 import moment from 'moment';
 
-import defaultMessage from './constants/defaultMessage';
+import defaultMessage from '../constants/defaultMessage';
 
-import {
-  TBambooHREmployeeAtOffice,
-  TBambooHREmployeeExtended,
-  TWhosOut,
-} from '.';
-import {
-  FRIDAY_ISO_WEEKDAY,
-  HUMAN_READABLE_DATE,
-  MONDAY_ISO_WEEKDAY,
-  ordinalSuffixOf,
-  YEAR_MONTH_DATE_FORMAT,
-} from './common';
-import { postSlackMessage } from './http';
-
-export const pusblishBankHolidays = async (
-  bankHolidays: TWhosOut,
-  today: moment.Moment
-): Promise<void> => {
-  const monthBankHolidaysBlocks: any[] = [];
-  let nextBankHolidaysBlocks: any[] = [];
-
-  if (
-    bankHolidays.month.length > 0 &&
-    ((today.date() === 1 && today.isoWeekday() <= FRIDAY_ISO_WEEKDAY) ||
-      (today.date() === 2 && today.isoWeekday() === MONDAY_ISO_WEEKDAY) ||
-      (today.date() === 3 && today.isoWeekday() === MONDAY_ISO_WEEKDAY))
-  ) {
-    monthBankHolidaysBlocks.push({
-      type: 'context',
-      elements: [
-        {
-          type: 'mrkdwn',
-          text: '*This month bank holidays:*',
-        },
-      ],
-    });
-
-    monthBankHolidaysBlocks.push(
-      ...bankHolidays.month.map(holiday => ({
-        type: 'section',
-        text: {
-          type: 'mrkdwn',
-          text: `*${holiday.name}*\n${moment(holiday.start).format(
-            HUMAN_READABLE_DATE
-          )}`,
-        },
-      }))
-    );
-
-    monthBankHolidaysBlocks.push({
-      type: 'divider',
-    });
-  }
-
-  if (bankHolidays.next.length > 0) {
-    nextBankHolidaysBlocks = bankHolidays.next.map(holiday => ({
-      type: 'section',
-      text: {
-        type: 'mrkdwn',
-        text: `*${holiday.name}*\n${moment(holiday.start).format(
-          HUMAN_READABLE_DATE
-        )}`,
-      },
-    }));
-  }
-
-  if (monthBankHolidaysBlocks.length > 0 || nextBankHolidaysBlocks.length > 0) {
-    const message = {
-      text: '🏖️ Bank Holidays',
-      blocks: [
-        {
-          type: 'header',
-          text: {
-            type: 'plain_text',
-            text: '🏖️ Bank Holidays',
-            emoji: true,
-          },
-        },
-        ...monthBankHolidaysBlocks,
-        ...nextBankHolidaysBlocks,
-      ],
-    };
-
-    await postSlackMessage(
-      process.env.BANK_HOLIDAYS_WEBHOOK_URL ?? '',
-      message
-    );
-  }
-};
-
-export const publishEmployeesAtOffice = async (
-  employees: TBambooHREmployeeExtended[],
-  employeesAtOffice: TBambooHREmployeeAtOffice[],
-  today: moment.Moment
-): Promise<void> => {
-  // First filter 'employeesAtOffice' to those included in 'employees'
-  const filteredEmployeesAtOffice = employeesAtOffice.reduce<
-    TBambooHREmployeeExtended[]
-  >((previousValue, currentEmployee) => {
-    const employee = employees.find(e => e.id === currentEmployee.employeeId);
-    return employee ? previousValue.concat(employee) : previousValue;
-  }, []);
-
-  const blocks =
-    filteredEmployeesAtOffice.length > 0
-      ? filteredEmployeesAtOffice.map(e => ({
-          type: 'context',
-          elements: [
-            {
-              type: 'image',
-              image_url: e.photoUrl,
-              alt_text: 'employee avatar',
-            },
-            {
-              type: 'mrkdwn',
-              text: `*${e.displayName}*`,
-            },
-          ],
-        }))
-      : [
-          {
-            type: 'context',
-            elements: [
-              {
-                type: 'mrkdwn',
-                text: ':eyes: *Nobody at the office!*',
-              },
-            ],
-          },
-        ];
-
-  const message = {
-    text: `🏢 ${
-      today.isoWeekday() < FRIDAY_ISO_WEEKDAY ? 'Tomorrow' : 'Next Monday'
-    } at One Beyond offices`,
-    blocks: [
-      {
-        type: 'header',
-        text: {
-          type: 'plain_text',
-          text: `🏢 ${
-            today.isoWeekday() < FRIDAY_ISO_WEEKDAY ? 'Tomorrow' : 'Next Monday'
-          } at One Beyond offices`,
-          emoji: true,
-        },
-      },
-      ...blocks,
-    ],
-  };
-
-  await postSlackMessage(process.env.OFFICE_WEBHOOK_URL ?? '', message);
-};
+import { TBambooHREmployeeExtended } from '..';
+import { FRIDAY_ISO_WEEKDAY, ordinalSuffixOf } from '../common';
+import { postSlackMessage } from '../http';
 
 export const publishEmployeesCelebrations = async (
   employees: TBambooHREmployeeExtended[],
   today: moment.Moment
 ): Promise<void> => {
-  // FIRST DAY
+  const firstDayBlocks: any[] = buildFirstDayBlocks(employees, today);
+  const birthdaysBlocks: any[] = buildBirthdaysBlocks(employees, today);
+  const anniversariesBlocks: any[] = buildAnniversariesBlocks(employees, today);
+
+  const celebrationMessages = [
+    ...firstDayBlocks,
+    ...birthdaysBlocks,
+    ...anniversariesBlocks,
+  ];
+
+  await postSlackMessage(
+    process.env.CELEBRATIONS_WEBHOOK_URL ?? '',
+    buildMessageToSend(celebrationMessages)
+  );
+};
+
+const buildMessageToSend = (messages: object[]) => {
+  const base = {
+    text: "🥳 Let's celebrate together",
+    blocks: [
+      {
+        type: 'header',
+        text: {
+          type: 'plain_text',
+          text: "🥳 Let's celebrate together",
+          emoji: true,
+        },
+      },
+    ],
+  };
+
+  return messages.length > 0
+    ? {
+        ...base,
+        blocks: [...base.blocks, ...messages],
+      }
+    : {
+        ...base,
+        blocks: [...base.blocks, defaultMessage],
+      };
+};
+
+const buildFirstDayBlocks = (
+  employees: TBambooHREmployeeExtended[],
+  today: moment.Moment
+): any[] => {
   const firstDayEmployees = employees
     .filter(employee => moment(employee.hireDate).isValid())
     .filter(employee => moment(employee.hireDate).isSame(today, 'day'));
@@ -197,8 +93,13 @@ export const publishEmployeesCelebrations = async (
       type: 'divider',
     });
   }
+  return firstDayBlocks;
+};
 
-  // BIRTHDAY
+const buildBirthdaysBlocks = (
+  employees: TBambooHREmployeeExtended[],
+  today: moment.Moment
+): any[] => {
   const birthdays = employees
     .filter(employee => employee.birthday)
     .reduce<TBambooHREmployeeExtended[]>((previousValue, employee) => {
@@ -270,8 +171,13 @@ export const publishEmployeesCelebrations = async (
       type: 'divider',
     });
   }
+  return birthdaysBlocks;
+};
 
-  // ANNIVERSARY
+const buildAnniversariesBlocks = (
+  employees: TBambooHREmployeeExtended[],
+  today: moment.Moment
+): any[] => {
   const anniversaries = employees
     .filter(employee => moment(employee.hireDate).isValid())
     .reduce<TBambooHREmployeeExtended[]>((previousValue, employee) => {
@@ -359,43 +265,5 @@ export const publishEmployeesCelebrations = async (
     });
   }
 
-  const celebrationMessages = [
-    ...firstDayBlocks,
-    ...birthdaysBlocks,
-    ...anniversariesBlocks,
-  ];
-
-  const buildMessageToSend = (messages: object[]) => {
-    const base = {
-      text: "🥳 Let's celebrate together",
-      blocks: [
-        {
-          type: 'header',
-          text: {
-            type: 'plain_text',
-            text: "🥳 Let's celebrate together",
-            emoji: true,
-          },
-        },
-      ],
-    };
-
-    return messages.length > 0
-      ? {
-          ...base,
-          blocks: [...base.blocks, ...messages],
-        }
-      : {
-          ...base,
-          blocks: {
-            ...base.blocks,
-            ...defaultMessage,
-          },
-        };
-  };
-
-  await postSlackMessage(
-    process.env.CELEBRATIONS_WEBHOOK_URL ?? '',
-    buildMessageToSend(celebrationMessages)
-  );
+  return anniversariesBlocks;
 };

@@ -10,7 +10,7 @@
 - Work anniversaries, including a welcome message on the first day
 - Company-observed holidays
 
-## Setup
+## ⚙️ Setup
 
 - Clone the repository and run `npm install`.
 - Ensure your [AWS credentials are available](https://serverless.com/framework/docs/providers/aws/guide/credentials/).
@@ -40,7 +40,7 @@ To run it locally, you can create an `.env` file. To deploy it in the cloud, you
 
 Apart from the env variables, it will read the `BAMBOOHR_KEY` secret from [AWS Secrets Manager](https://aws.amazon.com/es/secrets-manager/).
 
-## Usage
+## 🗒️ Usage
 
 ### Deployment
 
@@ -58,7 +58,7 @@ After successful deployment, you can invoke the deployed function by using the f
 serverless invoke --function main
 ```
 
-## Local development
+## 🏗️ Local development
 
 First you need to create an `.env` file with the following variables:
 
@@ -98,6 +98,11 @@ When you're finished, remember to run:
 ```bash
 npm run infra:dev:stop
 ```
+
+## 🔗 Useful links
+
+- [Slack Block Kit documentation](https://api.slack.com/block-kit)
+- [Slack Block Kit builder](https://app.slack.com/block-kit-builder)
 
 ## Contributors ✨
 

@@ -9,7 +9,7 @@ import {
   publishEmployeesAtOffice,
   publishEmployeesCelebrations,
   pusblishBankHolidays,
-} from './publisher';
+} from './publishers';
 import { getSecret, initializeSecretsManager } from './secrets';
 import { TSecrets } from '.';
 
