@@ -26,11 +26,16 @@ export const publishEmployeesAtOffice = async (
       ? filteredEmployeesAtOffice.map(e => ({
           type: 'context',
           elements: [
-            {
-              type: 'image',
-              image_url: e.photoUrl,
-              alt_text: 'employee avatar',
-            },
+            e.photoUrl
+              ? {
+                  type: 'image',
+                  image_url: e.photoUrl,
+                  alt_text: 'employee avatar',
+                }
+              : {
+                  type: 'plain_text',
+                  text: ':bust_in_silhouette:',
+                },
             {
               type: 'mrkdwn',
               text: `*${e.displayName}*`,

@@ -76,11 +76,16 @@ const buildFirstDayBlocks = (
       ...firstDayEmployees.map(employee => ({
         type: 'context',
         elements: [
-          {
-            type: 'image',
-            image_url: employee.photoUrl,
-            alt_text: 'employee avatar',
-          },
+          employee.photoUrl
+            ? {
+                type: 'image',
+                image_url: employee.photoUrl,
+                alt_text: 'employee avatar',
+              }
+            : {
+                type: 'plain_text',
+                text: ':bust_in_silhouette:',
+              },
           {
             type: 'mrkdwn',
             text: `*Welcome, ${employee.displayName}!*`,
@@ -153,11 +158,16 @@ const buildBirthdaysBlocks = (
       ...birthdays.map(employee => ({
         type: 'context',
         elements: [
-          {
-            type: 'image',
-            image_url: employee.photoUrl,
-            alt_text: 'employee avatar',
-          },
+          employee.photoUrl
+            ? {
+                type: 'image',
+                image_url: employee.photoUrl,
+                alt_text: 'employee avatar',
+              }
+            : {
+                type: 'plain_text',
+                text: ':bust_in_silhouette:',
+              },
           {
             type: 'mrkdwn',
             text: `*Happy birthday ${
@@ -245,11 +255,16 @@ const buildAnniversariesBlocks = (
       ...anniversaries.map(employee => ({
         type: 'context',
         elements: [
-          {
-            type: 'image',
-            image_url: employee.photoUrl,
-            alt_text: 'employee avatar',
-          },
+          employee.photoUrl
+            ? {
+                type: 'image',
+                image_url: employee.photoUrl,
+                alt_text: 'employee avatar',
+              }
+            : {
+                type: 'plain_text',
+                text: ':bust_in_silhouette:',
+              },
           {
             type: 'mrkdwn',
             text: `*Happy ${employee.anniversary} anniversary ${
