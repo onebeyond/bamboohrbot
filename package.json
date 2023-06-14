@@ -19,7 +19,7 @@
     "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^17.6.1",
     "@jest/globals": "^29.5.0",
-    "@tsconfig/node16": "^1.0.3",
+    "@tsconfig/node18": "^2.0.1",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.11",
     "esbuild": "^0.17.17",

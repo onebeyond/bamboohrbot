@@ -6,7 +6,7 @@ useDotenv: true
 
 provider:
   name: aws
-  runtime: nodejs16.x
+  runtime: nodejs18.x
   region: ${env:AWS_REGION}
   stage: ${env:ENVIRONMENT}
   timeout: 180 # 3 minutes
