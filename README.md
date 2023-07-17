@@ -1,5 +1,8 @@
 # bamboohrbot
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/2cb9384daf04fc540596/maintainability)](https://codeclimate.com/github/onebeyond/bamboohrbot/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/2cb9384daf04fc540596/test_coverage)](https://codeclimate.com/github/onebeyond/bamboohrbot/test_coverage)
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
