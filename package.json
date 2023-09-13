@@ -7,6 +7,7 @@
     "invoke": "ENVIRONMENT=local serverless invoke local --function main",
     "prepare": "husky install",
     "test": "jest",
+    "coverage": "jest --coverage",
     "lint": "tslint -c tslint.json 'src/**/*.ts' 'test/**/*.ts'",
     "format": "prettier --write --ignore-unknown .",
     "infra:dev:start": "docker-compose -f docker/docker-compose.dev.yml up -d",
