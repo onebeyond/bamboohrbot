@@ -1,13 +1,12 @@
 # bamboohrbot
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/2cb9384daf04fc540596/maintainability)](https://codeclimate.com/github/onebeyond/bamboohrbot/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/2cb9384daf04fc540596/test_coverage)](https://codeclimate.com/github/onebeyond/bamboohrbot/test_coverage)
-
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
-
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+<p align="center">
+  <a href="https://github.com/onebeyond/bamboohrbot/actions/workflows/test.yml" target="_blank"><img src="https://github.com/onebeyond/bamboohrbot/actions/workflows/test.yml/badge.svg" alt="run-tests workflow" /></a>
+  <a href="https://github.com/onebeyond/bamboohrbot/actions/workflows/main.yml" target="_blank"><img src="https://github.com/onebeyond/bamboohrbot/actions/workflows/main.yml/badge.svg" alt="deploy-to-aws workflow" /></a>
+  <a href="https://codeclimate.com/github/onebeyond/bamboohrbot/maintainability"><img src="https://api.codeclimate.com/v1/badges/2cb9384daf04fc540596/maintainability" /></a>
+  <a href="https://codeclimate.com/github/onebeyond/bamboohrbot/test_coverage"><img src="https://api.codeclimate.com/v1/badges/2cb9384daf04fc540596/test_coverage" /></a>
+  <a href="https://img.shields.io/github/all-contributors/onebeyond/bamboohrbot?color=ee8449&style=flat-square" target="_blank"><img src="https://img.shields.io/github/all-contributors/onebeyond/bamboohrbot?color=ee8449&style=flat-square" alt="all-contributors" /></a>
+</p>
 
 🤖 Bot to publish BambooHR notifications to slack each weekday:
 
