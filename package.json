@@ -4,6 +4,7 @@
   "description": "Bot to publish BambooHR notifications (company holidays, work anniversaries, birthdays, and who is at the office) to slack each weekday.",
   "license": "MIT",
   "scripts": {
+    "dev": "ts-node src/app.ts",
     "invoke": "ENVIRONMENT=local serverless invoke local --function main",
     "prepare": "husky install",
     "test": "jest",
