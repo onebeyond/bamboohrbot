@@ -5,6 +5,15 @@
     "prettier"
   ],
   "jsRules": {},
-  "rules": {},
+  "rules": {
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "error"
+        ]
+      }
+    ]
+  },
   "rulesDirectory": []
 }

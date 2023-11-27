@@ -1,17 +1,16 @@
 import moment from 'moment';
 
-import { TWhosOut } from '..';
+import { TSlackBlock, TSlackMessage, TWhosOut } from '..';
 import {
   FRIDAY_ISO_WEEKDAY,
   HUMAN_READABLE_DATE,
   MONDAY_ISO_WEEKDAY,
 } from '../common';
-import { postSlackMessage } from '../http';
 
-export const pusblishBankHolidays = async (
+export default function bankHolidaysBlockBuilder(
   bankHolidays: TWhosOut,
   today: moment.Moment
-): Promise<void> => {
+): TSlackMessage {
   const monthBankHolidaysBlocks: any[] = [];
   let nextBankHolidaysBlocks: any[] = [];
 
@@ -60,26 +59,24 @@ export const pusblishBankHolidays = async (
     }));
   }
 
+  let blocks: TSlackBlock[] = [];
   if (monthBankHolidaysBlocks.length > 0 || nextBankHolidaysBlocks.length > 0) {
-    const message = {
-      text: '🏖️ Bank Holidays',
-      blocks: [
-        {
-          type: 'header',
-          text: {
-            type: 'plain_text',
-            text: '🏖️ Bank Holidays',
-            emoji: true,
-          },
+    blocks = [
+      {
+        type: 'header',
+        text: {
+          type: 'plain_text',
+          text: '🏖️ Bank Holidays',
+          emoji: true,
         },
-        ...monthBankHolidaysBlocks,
-        ...nextBankHolidaysBlocks,
-      ],
-    };
-
-    await postSlackMessage(
-      process.env.BANK_HOLIDAYS_WEBHOOK_URL ?? '',
-      message
-    );
+      },
+      ...monthBankHolidaysBlocks,
+      ...nextBankHolidaysBlocks,
+    ];
   }
-};
+
+  return {
+    text: '🏖️ Bank Holidays',
+    blocks,
+  };
+}

@@ -1,32 +1,28 @@
 import moment from 'moment';
 
 import defaultMessage from '../constants/defaultMessage';
+import { TBambooHREmployeeExtended, TSlackBlock, TSlackMessage } from '..';
+import { FRIDAY_ISO_WEEKDAY } from '../common';
+import { ordinalSuffix } from '../utils/ordinalSuffix';
 
-import { TBambooHREmployeeExtended } from '..';
-import { FRIDAY_ISO_WEEKDAY, ordinalSuffixOf } from '../common';
-import { postSlackMessage } from '../http';
-
-export const publishEmployeesCelebrations = async (
+export default function employeesCelebrationsBlockBuilder(
   employees: TBambooHREmployeeExtended[],
   today: moment.Moment
-): Promise<void> => {
-  const firstDayBlocks: any[] = buildFirstDayBlocks(employees, today);
-  const birthdaysBlocks: any[] = buildBirthdaysBlocks(employees, today);
-  const anniversariesBlocks: any[] = buildAnniversariesBlocks(employees, today);
+): TSlackMessage {
+  const firstDayBlocks = buildFirstDayBlocks(employees, today);
+  const birthdaysBlocks = buildBirthdaysBlocks(employees, today);
+  const anniversariesBlocks = buildAnniversariesBlocks(employees, today);
 
-  const celebrationMessages = [
+  return buildMessageToSend([
     ...firstDayBlocks,
     ...birthdaysBlocks,
     ...anniversariesBlocks,
-  ];
+  ]);
+}
 
-  await postSlackMessage(
-    process.env.CELEBRATIONS_WEBHOOK_URL ?? '',
-    buildMessageToSend(celebrationMessages)
-  );
-};
-
-const buildMessageToSend = (messages: object[]) => {
+const buildMessageToSend = (
+  messages: TSlackBlock[]
+): { text: string; blocks: TSlackBlock[] } => {
   const base = {
     text: "🥳 Let's celebrate together",
     blocks: [
@@ -55,12 +51,12 @@ const buildMessageToSend = (messages: object[]) => {
 const buildFirstDayBlocks = (
   employees: TBambooHREmployeeExtended[],
   today: moment.Moment
-): any[] => {
+): TSlackBlock[] => {
   const firstDayEmployees = employees
     .filter(employee => moment(employee.hireDate).isValid())
     .filter(employee => moment(employee.hireDate).isSame(today, 'day'));
 
-  const firstDayBlocks: any[] = [];
+  const firstDayBlocks = [];
   if (firstDayEmployees.length > 0) {
     firstDayBlocks.push({
       type: 'context',
@@ -104,7 +100,7 @@ const buildFirstDayBlocks = (
 const buildBirthdaysBlocks = (
   employees: TBambooHREmployeeExtended[],
   today: moment.Moment
-): any[] => {
+): TSlackBlock[] => {
   const birthdays = employees
     .filter(employee => employee.birthday)
     .reduce<TBambooHREmployeeExtended[]>((previousValue, employee) => {
@@ -141,7 +137,7 @@ const buildBirthdaysBlocks = (
       return previousValue;
     }, []);
 
-  const birthdaysBlocks: any[] = [];
+  const birthdaysBlocks = [];
 
   if (birthdays.length > 0) {
     birthdaysBlocks.push({
@@ -187,7 +183,7 @@ const buildBirthdaysBlocks = (
 const buildAnniversariesBlocks = (
   employees: TBambooHREmployeeExtended[],
   today: moment.Moment
-): any[] => {
+): TSlackBlock[] => {
   const anniversaries = employees
     .filter(employee => moment(employee.hireDate).isValid())
     .reduce<TBambooHREmployeeExtended[]>((previousValue, employee) => {
@@ -211,7 +207,7 @@ const buildAnniversariesBlocks = (
       ) {
         return previousValue.concat({
           ...employee,
-          anniversary: ordinalSuffixOf(
+          anniversary: ordinalSuffix(
             today.year() - moment(employee.hireDate).year()
           ),
         });
@@ -228,7 +224,7 @@ const buildAnniversariesBlocks = (
       ) {
         return previousValue.concat({
           ...employee,
-          anniversary: ordinalSuffixOf(
+          anniversary: ordinalSuffix(
             today.year() - moment(employee.hireDate).year()
           ),
           anniversaryOn: moment(hireDateWithCurrentYear).format('dddd'),
@@ -238,7 +234,7 @@ const buildAnniversariesBlocks = (
       return previousValue;
     }, []);
 
-  const anniversariesBlocks: any[] = [];
+  const anniversariesBlocks = [];
 
   if (anniversaries.length > 0) {
     anniversariesBlocks.push({
