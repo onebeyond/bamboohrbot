@@ -1,5 +1,5 @@
 import pMap from 'p-map';
-import sdk from '@api/bamboohr'; // @bamboohr/v1#43haj4kl796vw3d
+import sdk from '@api/bamboohr';
 
 import { CONCURRENCY } from '../common';
 import {

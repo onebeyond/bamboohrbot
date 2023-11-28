@@ -1,5 +1,5 @@
 import moment from 'moment';
-import sdk from '@api/bamboohr'; // @bamboohr/v1#43haj4kl796vw3d
+import sdk from '@api/bamboohr';
 
 import { TBambooHRWhosOut, TWhosOut } from '..';
 import { BAMBOOHR_TIME_WHOS_OUT_TYPE, YEAR_MONTH_DATE_FORMAT } from '../common';
