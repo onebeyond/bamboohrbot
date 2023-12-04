@@ -7,9 +7,9 @@ import {
   HUMAN_READABLE_DATE,
   BAMBOOHR_TIME_OFF_APPROVED,
   BAMBOOHR_TIME_WHOS_OUT_TYPE,
-  ordinalSuffixOf,
-  nextWorkingDay,
 } from '../src/common';
+import { ordinalSuffix } from '../src/utils/ordinalSuffix';
+import { nextWorkingDay } from '../src/utils/nextWorkingDay';
 
 describe('Constants', () => {
   test('Constants values', () => {
@@ -25,37 +25,37 @@ describe('Constants', () => {
 
 describe('Ordinal numbers', () => {
   test('First 31 ordinal numbers', () => {
-    expect(ordinalSuffixOf(1)).toBe('1st');
-    expect(ordinalSuffixOf(2)).toBe('2nd');
-    expect(ordinalSuffixOf(3)).toBe('3rd');
-    expect(ordinalSuffixOf(4)).toBe('4th');
-    expect(ordinalSuffixOf(5)).toBe('5th');
-    expect(ordinalSuffixOf(6)).toBe('6th');
-    expect(ordinalSuffixOf(7)).toBe('7th');
-    expect(ordinalSuffixOf(8)).toBe('8th');
-    expect(ordinalSuffixOf(9)).toBe('9th');
-    expect(ordinalSuffixOf(10)).toBe('10th');
-    expect(ordinalSuffixOf(11)).toBe('11th');
-    expect(ordinalSuffixOf(12)).toBe('12th');
-    expect(ordinalSuffixOf(13)).toBe('13th');
-    expect(ordinalSuffixOf(14)).toBe('14th');
-    expect(ordinalSuffixOf(15)).toBe('15th');
-    expect(ordinalSuffixOf(16)).toBe('16th');
-    expect(ordinalSuffixOf(17)).toBe('17th');
-    expect(ordinalSuffixOf(18)).toBe('18th');
-    expect(ordinalSuffixOf(19)).toBe('19th');
-    expect(ordinalSuffixOf(20)).toBe('20th');
-    expect(ordinalSuffixOf(21)).toBe('21st');
-    expect(ordinalSuffixOf(22)).toBe('22nd');
-    expect(ordinalSuffixOf(23)).toBe('23rd');
-    expect(ordinalSuffixOf(24)).toBe('24th');
-    expect(ordinalSuffixOf(25)).toBe('25th');
-    expect(ordinalSuffixOf(26)).toBe('26th');
-    expect(ordinalSuffixOf(27)).toBe('27th');
-    expect(ordinalSuffixOf(28)).toBe('28th');
-    expect(ordinalSuffixOf(29)).toBe('29th');
-    expect(ordinalSuffixOf(30)).toBe('30th');
-    expect(ordinalSuffixOf(31)).toBe('31st');
+    expect(ordinalSuffix(1)).toBe('1st');
+    expect(ordinalSuffix(2)).toBe('2nd');
+    expect(ordinalSuffix(3)).toBe('3rd');
+    expect(ordinalSuffix(4)).toBe('4th');
+    expect(ordinalSuffix(5)).toBe('5th');
+    expect(ordinalSuffix(6)).toBe('6th');
+    expect(ordinalSuffix(7)).toBe('7th');
+    expect(ordinalSuffix(8)).toBe('8th');
+    expect(ordinalSuffix(9)).toBe('9th');
+    expect(ordinalSuffix(10)).toBe('10th');
+    expect(ordinalSuffix(11)).toBe('11th');
+    expect(ordinalSuffix(12)).toBe('12th');
+    expect(ordinalSuffix(13)).toBe('13th');
+    expect(ordinalSuffix(14)).toBe('14th');
+    expect(ordinalSuffix(15)).toBe('15th');
+    expect(ordinalSuffix(16)).toBe('16th');
+    expect(ordinalSuffix(17)).toBe('17th');
+    expect(ordinalSuffix(18)).toBe('18th');
+    expect(ordinalSuffix(19)).toBe('19th');
+    expect(ordinalSuffix(20)).toBe('20th');
+    expect(ordinalSuffix(21)).toBe('21st');
+    expect(ordinalSuffix(22)).toBe('22nd');
+    expect(ordinalSuffix(23)).toBe('23rd');
+    expect(ordinalSuffix(24)).toBe('24th');
+    expect(ordinalSuffix(25)).toBe('25th');
+    expect(ordinalSuffix(26)).toBe('26th');
+    expect(ordinalSuffix(27)).toBe('27th');
+    expect(ordinalSuffix(28)).toBe('28th');
+    expect(ordinalSuffix(29)).toBe('29th');
+    expect(ordinalSuffix(30)).toBe('30th');
+    expect(ordinalSuffix(31)).toBe('31st');
   });
 });
 

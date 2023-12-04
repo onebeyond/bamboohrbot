@@ -3,16 +3,15 @@ import moment from 'moment';
 import {
   TBambooHREmployeeAtOffice,
   TBambooHREmployeeExtended,
-  TWhosOut,
+  TSlackMessage,
 } from '..';
 import { FRIDAY_ISO_WEEKDAY } from '../common';
-import { postSlackMessage } from '../http';
 
-export const publishEmployeesAtOffice = async (
+export default function employeesAtOfficeBlockBuilder(
   employees: TBambooHREmployeeExtended[],
   employeesAtOffice: TBambooHREmployeeAtOffice[],
   today: moment.Moment
-): Promise<void> => {
+): TSlackMessage {
   // First filter 'employeesAtOffice' to those included in 'employees'
   const filteredEmployeesAtOffice = employeesAtOffice.reduce<
     TBambooHREmployeeExtended[]
@@ -54,7 +53,7 @@ export const publishEmployeesAtOffice = async (
           },
         ];
 
-  const message = {
+  return {
     text: `🏢 ${
       today.isoWeekday() < FRIDAY_ISO_WEEKDAY ? 'Tomorrow' : 'Next Monday'
     } at One Beyond offices`,
@@ -72,6 +71,4 @@ export const publishEmployeesAtOffice = async (
       ...blocks,
     ],
   };
-
-  await postSlackMessage(process.env.OFFICE_WEBHOOK_URL ?? '', message);
-};
+}

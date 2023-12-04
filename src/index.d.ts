@@ -1,3 +1,5 @@
+import { type KnownBlock, type Block } from '@slack/bolt';
+
 type TBambooHREmployeesDirectoryField = {
   id: string;
   type: string;
@@ -68,11 +70,11 @@ export type TWhosOut = {
   month: TBambooHRWhosOut[];
 };
 
-type TSlackBlock = {};
+export type TSecrets = Record<string, any>;
+
+export type TSlackBlock = KnownBlock | Block;
 
 export type TSlackMessage = {
   text: string;
   blocks: TSlackBlock[];
 };
-
-export type TSecrets = Record<string, any>;

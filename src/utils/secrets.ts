@@ -4,9 +4,12 @@ import {
   SecretsManagerClientConfig,
 } from '@aws-sdk/client-secrets-manager';
 
-let client: SecretsManagerClient;
+import { TSecrets } from '..';
 
-export const initializeSecretsManager = () => {
+let client: SecretsManagerClient;
+const secrets: TSecrets = {};
+
+export function initializeSecretsManager() {
   const config: SecretsManagerClientConfig =
     process.env.ENVIRONMENT === 'local'
       ? {
@@ -20,9 +23,17 @@ export const initializeSecretsManager = () => {
       : {};
 
   client = new SecretsManagerClient(config);
-};
+}
 
-export const getSecret = async (id: string): Promise<string | undefined> => {
+export async function getSecret(key: string): Promise<string | undefined> {
+  if (secrets[key]) return secrets[key];
+
+  const value = await getSecretFromAWS(key);
+  secrets[key] = value;
+  return value;
+}
+
+async function getSecretFromAWS(id: string): Promise<string | undefined> {
   try {
     const command = new GetSecretValueCommand({
       SecretId: id,
@@ -35,4 +46,4 @@ export const getSecret = async (id: string): Promise<string | undefined> => {
     console.error(message);
     throw new Error(message);
   }
-};
+}
