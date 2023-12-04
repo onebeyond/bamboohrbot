@@ -5,4 +5,4 @@ export const CONCURRENCY = 15;
 export const YEAR_MONTH_DATE_FORMAT = 'YYYY-MM-DD';
 export const HUMAN_READABLE_DATE = 'dddd, D MMMM YYYY';
 export const BAMBOOHR_TIME_OFF_APPROVED = 'approved';
-export const BAMBOOHR_TIME_WHOS_OUT_TYPE = 'holiday';
+export const BAMBOOHR_COMPANY_HOLIDAYS_TYPE = 'holiday';
