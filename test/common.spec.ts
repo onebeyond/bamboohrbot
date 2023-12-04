@@ -6,7 +6,7 @@ import {
   YEAR_MONTH_DATE_FORMAT,
   HUMAN_READABLE_DATE,
   BAMBOOHR_TIME_OFF_APPROVED,
-  BAMBOOHR_TIME_WHOS_OUT_TYPE,
+  BAMBOOHR_COMPANY_HOLIDAYS_TYPE,
 } from '../src/common';
 import { ordinalSuffix } from '../src/utils/ordinalSuffix';
 import { nextWorkingDay } from '../src/utils/nextWorkingDay';
@@ -19,7 +19,7 @@ describe('Constants', () => {
     expect(YEAR_MONTH_DATE_FORMAT).toBe('YYYY-MM-DD');
     expect(HUMAN_READABLE_DATE).toBe('dddd, D MMMM YYYY');
     expect(BAMBOOHR_TIME_OFF_APPROVED).toBe('approved');
-    expect(BAMBOOHR_TIME_WHOS_OUT_TYPE).toBe('holiday');
+    expect(BAMBOOHR_COMPANY_HOLIDAYS_TYPE).toBe('holiday');
   });
 });
 

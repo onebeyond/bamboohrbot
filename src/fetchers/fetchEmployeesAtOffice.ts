@@ -14,7 +14,7 @@ export default async function fetchEmployeesAtOffice(
     start: nextWorkingDay(today).format(YEAR_MONTH_DATE_FORMAT),
     end: nextWorkingDay(today).format(YEAR_MONTH_DATE_FORMAT),
     status: BAMBOOHR_TIME_OFF_APPROVED,
-    type: process.env.TIME_OFF_OFFICE_CODE,
+    type: process.env.BAMBOOHR_TIME_OFF_OFFICE_CODE,
   });
 
   return data as TBambooHREmployeeAtOffice[];

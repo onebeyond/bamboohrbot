@@ -61,17 +61,17 @@ export async function main() {
   await Promise.allSettled([
     postSlackMessage(
       app,
-      process.env.OFFICE_CHANNEL_ID ?? '',
+      process.env.SLACK_OFFICE_CHANNEL_IDS ?? '',
       employeesAtOfficeMessage
     ),
     postSlackMessage(
       app,
-      process.env.CELEBRATIONS_CHANNEL_ID ?? '',
+      process.env.SLACK_CELEBRATIONS_CHANNEL_IDS ?? '',
       employeesCelebrationsMessage
     ),
     postSlackMessage(
       app,
-      process.env.BANK_HOLIDAYS_CHANNEL_ID ?? '',
+      process.env.SLACK_BANK_HOLIDAYS_CHANNEL_IDS ?? '',
       bankHolidaysMessage
     ),
   ]);

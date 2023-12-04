@@ -34,11 +34,11 @@ AWS_ACCOUNT_ID=
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 BAMBOOHR_SUBDOMAIN=
-TIME_OFF_OFFICE_CODE=
+BAMBOOHR_TIME_OFF_OFFICE_CODE=
 EMPLOYEE_COUNTRY_FILTER=
-CELEBRATIONS_CHANNEL_ID=
-BANK_HOLIDAYS_CHANNEL_ID=
-OFFICE_CHANNEL_ID=
+SLACK_CELEBRATIONS_CHANNEL_IDS=
+SLACK_BANK_HOLIDAYS_CHANNEL_IDS=
+SLACK_OFFICE_CHANNEL_IDS=
 ```
 
 To run it locally, you can create an `.env` file. To deploy it in the cloud, you need to define them in the CI/CD pipeline, as they are read in the GitHub action that deploys it to AWS.
@@ -71,13 +71,13 @@ First you need to create an `.env` file with the following variables:
 ENVIRONMENT=local
 AWS_ACCOUNT_ID=
 BAMBOOHR_SUBDOMAIN=
-TIME_OFF_OFFICE_CODE=
+BAMBOOHR_TIME_OFF_OFFICE_CODE=
 EMPLOYEE_COUNTRY_FILTER=
 AWS_ENDPOINT=http://localhost:4566 # Localstack
 AWS_REGION=us-east-1 # Localstack
-CELEBRATIONS_CHANNEL_ID=
-BANK_HOLIDAYS_CHANNEL_ID=
-OFFICE_CHANNEL_ID=
+SLACK_CELEBRATIONS_CHANNEL_IDS=
+SLACK_BANK_HOLIDAYS_CHANNEL_IDS=
+SLACK_OFFICE_CHANNEL_IDS=
 ```
 
 Apart from that, you need to create an `.env` file inside the `docker` folder with the following env variables:

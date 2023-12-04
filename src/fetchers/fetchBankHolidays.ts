@@ -2,7 +2,10 @@ import moment from 'moment';
 import sdk from '@api/bamboohr';
 
 import { TBambooHRWhosOut, TWhosOut } from '..';
-import { BAMBOOHR_TIME_WHOS_OUT_TYPE, YEAR_MONTH_DATE_FORMAT } from '../common';
+import {
+  BAMBOOHR_COMPANY_HOLIDAYS_TYPE,
+  YEAR_MONTH_DATE_FORMAT,
+} from '../common';
 import commonMetadata from './commonMetadata';
 import { nextWorkingDay } from '../utils/nextWorkingDay';
 
@@ -23,10 +26,10 @@ export default async function fetchBankHolidays(
 
   return {
     next: (whosOutData as TBambooHRWhosOut[]).filter(
-      e => e.type === BAMBOOHR_TIME_WHOS_OUT_TYPE
+      e => e.type === BAMBOOHR_COMPANY_HOLIDAYS_TYPE
     ),
     month: (whosOutThisMonthData as TBambooHRWhosOut[]).filter(
-      e => e.type === BAMBOOHR_TIME_WHOS_OUT_TYPE
+      e => e.type === BAMBOOHR_COMPANY_HOLIDAYS_TYPE
     ),
   };
 }
