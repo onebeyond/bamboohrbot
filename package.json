@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@api/bamboohr": "file:.api/apis/bamboohr",
-    "@aws-sdk/client-secrets-manager": "^3.470.0",
+    "@aws-sdk/client-secrets-manager": "^3.484.0",
     "@slack/bolt": "^3.16.0",
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",
