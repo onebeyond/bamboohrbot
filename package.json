@@ -23,7 +23,7 @@
     "@jest/globals": "^29.7.0",
     "@tsconfig/node18": "^18.2.2",
     "@types/jest": "^29.5.11",
-    "@types/node": "^20.10.7",
+    "@types/node": "^20.11.1",
     "esbuild": "^0.19.11",
     "eslint-config-prettier": "^9.1.0",
     "husky": "^8.0.3",
