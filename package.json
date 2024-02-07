@@ -31,7 +31,7 @@
     "npm-check-updates": "^16.14.12",
     "prettier": "^3.2.5",
     "serverless": "^3.38.0",
-    "serverless-esbuild": "^1.50.2",
+    "serverless-esbuild": "^1.51.0",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.2",
     "tslint": "^6.1.3",
