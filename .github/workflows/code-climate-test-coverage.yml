@@ -3,8 +3,6 @@ name: Code Climate Test Reporter
 on:
   push:
     branches: [main]
-#  pull_request:
-#    branches: [main]
 
 permissions: # added using https://github.com/step-security/secure-workflows
   contents: read
@@ -14,20 +12,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@8ca2b8b2ece13480cda6dacd3511b49857a23c09 # v2.5.1
+        uses: step-security/harden-runner@0080882f6c36860b6ba35c610c98ce87d4e2f26f # v2.10.2
         with:
           egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
-
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
-      - uses: actions/setup-node@5e21ff4d9bc1a8cf6de233a3057d20ec6b3fb69d # v3.8.1
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
+      - name: Setup Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af #v4.1.0
         with:
-          node-version: '18.x'
-      - run: npm ci
-      - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-      - run: chmod +x ./cc-test-reporter
-      - run: ./cc-test-reporter before-build
-      - run: npm run coverage
-      - run: ./cc-test-reporter format-coverage -t lcov coverage/lcov.info
-      - run: ./cc-test-reporter upload-coverage
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Test Reporter
+        run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+      - name: Make Test Reporter executable
+        run: chmod +x ./cc-test-reporter
+      - name: Before Build
+        run: ./cc-test-reporter before-build
+      - name: Coverage
+        run: npm run coverage
+      - name: Format Coverage
+        run: ./cc-test-reporter format-coverage -t lcov coverage/lcov.info
+      - name: Upload Coverage
+        run: ./cc-test-reporter upload-coverage
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
