@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "invoke": "ENVIRONMENT=local node_modules/.bin/serverless invoke local --function main",
-    "prepare": "husky install",
+    "prepare": "husky",
     "test": "jest",
     "coverage": "jest --coverage",
     "lint": "tslint -c tslint.json 'src/**/*.ts' 'test/**/*.ts'",
